@@ -1,0 +1,28 @@
+# Dependencies
+**/node_modules
+**/vendor
+
+# Environment & Credentials
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.local.example
+
+# Next.js & Build Output
+**/.next
+**/out
+**/build
+**/public/storage
+
+# Logs & Temporary Files
+*.log
+**/*.log
+.DS_Store
+Thumbs.db
+
+# IDE & AI History
+.claude/
+.claude-code-history/
+.codex-history/
+.vscode/
+.idea/

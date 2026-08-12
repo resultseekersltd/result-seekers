@@ -1,0 +1,168 @@
+/*
+ * Result Seekers Design Tokens
+ * Single source of truth for every design-token value used across the site.
+ * Source: 02_UI_UX_and_Design_System.md
+ *
+ * PROVENANCE — every value below is marked as one of:
+ *   [SPEC]    — an exact value given in the design system doc. Do not change
+ *               without checking the doc — these are contractual.
+ *   [CHOSEN]  — the doc names the token but not its value (e.g. "Near
+ *               Black", "H2", "soft shadow"). We picked a specific value
+ *               so components never hardcode ad-hoc numbers. Safe to
+ *               retune here — every component reads from these variables,
+ *               nothing hardcodes its own font-size/color/shadow.
+ *   [DERIVED] — computed from another token (e.g. Tailwind's built-in
+ *               radius/spacing scale), not a new decision.
+ */
+@theme {
+  /* ---------------------------------------------------------------------
+   * COLOUR — brand
+   * ------------------------------------------------------------------- */
+  /* [SPEC] Result Seekers Purple / Orange — the only two hex values the doc gives. */
+  --color-brand-purple: #4214c4;
+  --color-brand-orange: #f7941d;
+
+  /* [CHOSEN] Hover/active shades for the two brand colours — the doc doesn't
+   * define interaction states, so these are ~15% darker for contrast on hover. */
+  --color-brand-purple-dark: #34109c;
+  --color-brand-orange-dark: #d97b0a;
+
+  /* ---------------------------------------------------------------------
+   * COLOUR — neutral palette
+   * [CHOSEN] The doc names six neutral steps (White, Off White, Light Gray,
+   * Gray, Dark Gray, Near Black) but gives no hex values. Cool-toned greys
+   * (slight blue cast) were chosen to sit naturally next to the purple
+   * brand colour rather than reading as a mismatched warm/neutral grey.
+   * ------------------------------------------------------------------- */
+  --color-neutral-white: #ffffff;
+  --color-neutral-off-white: #f9f9fb;
+  --color-neutral-light-gray: #e6e7eb;
+  --color-neutral-gray: #98a0ae;
+  --color-neutral-dark-gray: #4b5566;
+  --color-neutral-near-black: #12131a;
+
+  /* ---------------------------------------------------------------------
+   * COLOUR — semantic aliases
+   * [DERIVED] What components actually reference (bg-background,
+   * text-foreground, etc.) instead of naming a palette step directly, so
+   * retuning the palette above never requires touching a component.
+   * ------------------------------------------------------------------- */
+  --color-background: var(--color-neutral-white);
+  --color-foreground: var(--color-neutral-near-black);
+  --color-muted: var(--color-neutral-off-white);
+  --color-muted-foreground: var(--color-neutral-dark-gray);
+  --color-border: var(--color-neutral-light-gray);
+  --color-primary: var(--color-brand-purple);
+  --color-primary-hover: var(--color-brand-purple-dark);
+  --color-primary-foreground: var(--color-neutral-white);
+  --color-accent: var(--color-brand-orange);
+  --color-accent-hover: var(--color-brand-orange-dark);
+  --color-accent-foreground: var(--color-neutral-white);
+
+  /* [CHOSEN] Form validation needs a state distinguishable from the brand
+   * palette (never orange/purple — those are actions, not status). The doc
+   * doesn't define these; standard, well-tested accessible red/green were
+   * picked rather than deriving from brand hues, so errors never look like
+   * a mis-styled CTA. Used only by form components (Input/Textarea/Select/
+   * FormField) — not part of the brand palette itself. */
+  --color-danger: #dc2626;
+  --color-danger-foreground: #ffffff;
+  --color-success: #16a34a;
+  --color-success-foreground: #ffffff;
+
+  /* ---------------------------------------------------------------------
+   * TYPOGRAPHY
+   * [CHOSEN] The doc requires exactly these ten named steps (Hero, Display,
+   * H1-H4, Body Large, Body, Small, Caption) but gives no sizes. The seven
+   * steps from Body down to Caption reuse Tailwind's own default type
+   * scale verbatim (12/14/16/18/20/24/30px, verified against
+   * node_modules/tailwindcss/theme.css) — it's a well-tested, widely used
+   * progression, and reusing it means these numbers aren't an arbitrary
+   * invention. Line-heights match Tailwind's own pairing for the same
+   * reason, rounded to the 4px spacing grid.
+   *
+   * Hero/Display/H1 use clamp() to scale down on mobile (required by the
+   * "mobile-first, no horizontal scrolling" rule elsewhere in the specs)
+   * without needing sm:/md: variants at every call site. Their max values
+   * continue the same scale (36/48/60px); their line-heights are unitless
+   * so they scale proportionally with the fluid font-size, loosened
+   * slightly versus Tailwind's tight 1.0-1.1 defaults for large type,
+   * since multi-line hero copy needs a touch more breathing room.
+   * ------------------------------------------------------------------- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --text-caption: 0.75rem; /* 12px, [CHOSEN] = Tailwind text-xs */
+  --text-caption--line-height: 1.3334; /* 16px */
+
+  --text-small: 0.875rem; /* 14px, [CHOSEN] = Tailwind text-sm */
+  --text-small--line-height: 1.4286; /* 20px */
+
+  --text-body: 1rem; /* 16px, [CHOSEN] = Tailwind text-base */
+  --text-body--line-height: 1.5; /* 24px */
+
+  --text-body-lg: 1.125rem; /* 18px, [CHOSEN] = Tailwind text-lg */
+  --text-body-lg--line-height: 1.5556; /* 28px */
+
+  --text-h4: 1.25rem; /* 20px, [CHOSEN] = Tailwind text-xl */
+  --text-h4--line-height: 1.4; /* 28px */
+  --text-h4--font-weight: 600;
+
+  --text-h3: 1.5rem; /* 24px, [CHOSEN] = Tailwind text-2xl */
+  --text-h3--line-height: 1.3334; /* 32px */
+  --text-h3--font-weight: 600;
+
+  --text-h2: 1.875rem; /* 30px, [CHOSEN] = Tailwind text-3xl */
+  --text-h2--line-height: 1.2; /* 36px */
+  --text-h2--font-weight: 700;
+
+  /* [CHOSEN] Fluid: 28px on mobile up to 36px desktop (continues the scale). */
+  --text-h1: clamp(1.75rem, 1.55rem + 1vw, 2.25rem);
+  --text-h1--line-height: 1.15;
+  --text-h1--font-weight: 700;
+
+  /* [CHOSEN] Fluid: 32px on mobile up to 48px desktop. */
+  --text-display: clamp(2rem, 1.7rem + 1.5vw, 3rem);
+  --text-display--line-height: 1.1;
+  --text-display--font-weight: 700;
+
+  /* [CHOSEN] Fluid: 40px on mobile up to 60px desktop. */
+  --text-hero: clamp(2.5rem, 2rem + 2.5vw, 3.75rem);
+  --text-hero--line-height: 1.05;
+  --text-hero--font-weight: 700;
+
+  /* ---------------------------------------------------------------------
+   * SPACING
+   * [SPEC] 4/8/12/16/24/32/48/64/80/96/128px is fully specified. No custom
+   * tokens needed: Tailwind v4's default --spacing is 0.25rem (4px), so
+   * p-1..p-32 (1,2,3,4,6,8,12,16,20,24,32) already produce exactly this
+   * sequence in px. Verified against node_modules/tailwindcss/theme.css.
+   * ------------------------------------------------------------------- */
+
+  /* ---------------------------------------------------------------------
+   * BORDER RADIUS
+   * [SPEC] Cards 16px, Buttons/Inputs 12px, Badges 999px, Large Feature
+   * Sections 24px is fully specified. [DERIVED] Tailwind's default
+   * --radius-xl/2xl/3xl are exactly 12/16/24px (verified against
+   * node_modules/tailwindcss/theme.css), so these aliases just name that
+   * intent instead of introducing new values. Badge is the literal 999px
+   * from the spec, not Tailwind's default 9999px "full" token.
+   * ------------------------------------------------------------------- */
+  --radius-button: var(--radius-xl);
+  --radius-input: var(--radius-xl);
+  --radius-card: var(--radius-2xl);
+  --radius-badge: 999px;
+  --radius-feature: var(--radius-3xl);
+
+  /* ---------------------------------------------------------------------
+   * SHADOWS
+   * [CHOSEN] The doc says "soft shadows only... cards should appear
+   * elevated, not detached" but gives no values. Two levels, both tinted
+   * with neutral-near-black (#12131a → rgb(18 19 26)) rather than pure
+   * black for a softer, less harsh shadow — keep in sync if that colour
+   * changes. `soft` is the default resting state for cards; `elevated` is
+   * for hover states and layered surfaces (menus, modals). Avoid reaching
+   * for Tailwind's built-in shadow-md/lg/xl utilities — use these two only.
+   * ------------------------------------------------------------------- */
+  --shadow-soft: 0 1px 2px rgb(18 19 26 / 0.04), 0 1px 3px rgb(18 19 26 / 0.08);
+  --shadow-elevated: 0 4px 8px rgb(18 19 26 / 0.08), 0 12px 24px -8px rgb(18 19 26 / 0.12);
+}
