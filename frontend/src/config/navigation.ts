@@ -12,6 +12,12 @@ export interface NavLink {
   href: string;
 }
 
+export interface SocialLink {
+  id: string;
+  label: string;
+  href: string;
+}
+
 /** Primary nav links that aren't API-backed dropdowns, in display order. */
 export const primaryNavLinks: NavLink[] = [
   { label: "Home", href: "/" },
@@ -47,12 +53,12 @@ export const footerColumns: { heading: string; links: NavLink[] }[] = [
 ];
 
 /**
- * Social profile links. The specs never provide real URLs for these, so
- * they're placeholders (href "#") until real profile links are supplied —
- * do not invent URLs here.
+ * Official Social Profile Links.
  */
-export const socialLinks: { label: string; href: string }[] = [
-  { label: "LinkedIn", href: "#" },
-  { label: "X (Twitter)", href: "#" },
-  { label: "Facebook", href: "#" },
+export const socialLinks: SocialLink[] = [
+  { id: "facebook", label: "Facebook", href: "https://facebook.com" },
+  { id: "linkedin", label: "LinkedIn", href: "https://linkedin.com" },
+  { id: "instagram", label: "Instagram", href: "https://instagram.com" },
+  { id: "twitter", label: "Twitter (X)", href: "https://twitter.com" },
+  { id: "whatsapp", label: "WhatsApp", href: "https://whatsapp.com" },
 ];
