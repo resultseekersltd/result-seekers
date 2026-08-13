@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { ChevronDown, X } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/layout/Logo";
 import { cn } from "@/lib/utils";
@@ -17,12 +18,20 @@ interface MobileNavProps {
   products: NavDropdownItem[];
 }
 
-/** [Home, About] before the Solutions/Products dropdown slots, per the nav order in the spec. */
+const emptySubscribe = () => () => {};
+function useIsClient() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
+}
+
 const LINKS_BEFORE_DROPDOWNS = primaryNavLinks.slice(0, 2);
 const LINKS_AFTER_DROPDOWNS = primaryNavLinks.slice(2);
 
 export function MobileNav({ open, onClose, solutions, products }: MobileNavProps) {
-  const prefersReducedMotion = useReducedMotion();
+  const isClient = useIsClient();
 
   useEffect(() => {
     if (!open) return;
@@ -41,49 +50,54 @@ export function MobileNav({ open, onClose, solutions, products }: MobileNavProps
     return () => document.removeEventListener("keydown", handleEscape);
   }, [open, onClose]);
 
-  return (
+  if (!isClient) return null;
+
+  return createPortal(
     <AnimatePresence>
       {open && (
-        <>
+        <div className="md:hidden">
+          {/* Backdrop overlay */}
           <motion.div
-            className="bg-neutral-near-black/40 fixed inset-0 z-40 md:hidden"
+            className="bg-neutral-near-black/60 fixed inset-0 z-[998] backdrop-blur-xs"
             aria-hidden="true"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: prefersReducedMotion ? 0 : 0.2 }}
+            transition={{ duration: 0.2 }}
           />
+
+          {/* Drawer container */}
           <motion.div
             id="mobile-nav-dialog"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
-            className="bg-background shadow-elevated fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col overflow-y-auto p-6 md:hidden"
-            initial={{ x: prefersReducedMotion ? 0 : "100%" }}
+            className="bg-background shadow-2xl fixed inset-y-0 right-0 z-[999] flex w-full max-w-xs sm:max-w-sm flex-col overflow-y-auto p-6"
+            initial={{ x: "100%" }}
             animate={{ x: 0 }}
-            exit={{ x: prefersReducedMotion ? 0 : "100%" }}
-            transition={{ duration: prefersReducedMotion ? 0 : 0.25, ease: "easeOut" }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between border-b border-border/50 pb-4">
               <Logo />
               <button
                 type="button"
                 onClick={onClose}
                 aria-label="Close menu"
-                className="text-foreground hover:bg-muted rounded-md p-2"
+                className="text-foreground hover:bg-muted focus:outline-hidden focus:ring-2 focus:ring-primary rounded-lg p-2 transition-colors cursor-pointer"
               >
                 <X className="size-6" aria-hidden="true" />
               </button>
             </div>
 
-            <nav className="mt-8 flex flex-1 flex-col gap-1">
+            <nav className="mt-6 flex flex-1 flex-col gap-1.5">
               {LINKS_BEFORE_DROPDOWNS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={onClose}
-                  className="text-body-lg text-foreground hover:bg-muted rounded-md px-3 py-3 font-medium"
+                  className="text-body-lg text-foreground hover:bg-muted rounded-lg px-3 py-2.5 font-medium transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -107,20 +121,23 @@ export function MobileNav({ open, onClose, solutions, products }: MobileNavProps
                   key={link.href}
                   href={link.href}
                   onClick={onClose}
-                  className="text-body-lg text-foreground hover:bg-muted rounded-md px-3 py-3 font-medium"
+                  className="text-body-lg text-foreground hover:bg-muted rounded-lg px-3 py-2.5 font-medium transition-colors"
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
 
-            <Button href={primaryCta.href} onClick={onClose} className="mt-6 justify-center">
-              {primaryCta.label}
-            </Button>
+            <div className="mt-8 border-t border-border/50 pt-4">
+              <Button href={primaryCta.href} onClick={onClose} className="w-full justify-center shadow-md">
+                {primaryCta.label}
+              </Button>
+            </div>
           </motion.div>
-        </>
+        </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }
 
@@ -142,7 +159,7 @@ function MobileNavSection({
       <Link
         href={href}
         onClick={onNavigate}
-        className="text-body-lg text-foreground hover:bg-muted rounded-md px-3 py-3 font-medium"
+        className="text-body-lg text-foreground hover:bg-muted rounded-lg px-3 py-2.5 font-medium transition-colors"
       >
         {label}
       </Link>
@@ -155,22 +172,22 @@ function MobileNavSection({
         type="button"
         onClick={() => setExpanded((prev) => !prev)}
         aria-expanded={expanded}
-        className="text-body-lg text-foreground hover:bg-muted flex w-full items-center justify-between rounded-md px-3 py-3 font-medium"
+        className="text-body-lg text-foreground hover:bg-muted flex w-full items-center justify-between rounded-lg px-3 py-2.5 font-medium transition-colors cursor-pointer"
       >
         {label}
         <ChevronDown
-          className={cn("size-5 transition-transform", expanded && "rotate-180")}
+          className={cn("size-5 transition-transform duration-200 text-muted-foreground", expanded && "rotate-180 text-primary")}
           aria-hidden="true"
         />
       </button>
       {expanded && (
-        <div className="border-border ml-3 flex flex-col gap-1 border-l pl-3">
+        <div className="border-border/60 ml-3 mt-1 flex flex-col gap-1 border-l pl-3">
           {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={onNavigate}
-              className="text-body text-muted-foreground hover:bg-muted hover:text-foreground rounded-md px-3 py-2"
+              className="text-small text-muted-foreground hover:bg-muted hover:text-foreground rounded-md px-3 py-2 transition-colors"
             >
               {item.label}
             </Link>
@@ -178,9 +195,9 @@ function MobileNavSection({
           <Link
             href={href}
             onClick={onNavigate}
-            className="text-small text-primary hover:bg-muted rounded-md px-3 py-2 font-semibold"
+            className="text-small text-primary hover:bg-muted rounded-md px-3 py-2 font-semibold transition-colors"
           >
-            View all {label}
+            View all {label} →
           </Link>
         </div>
       )}

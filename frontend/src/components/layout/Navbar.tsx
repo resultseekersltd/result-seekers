@@ -21,16 +21,9 @@ interface NavbarProps {
 const LINKS_BEFORE_DROPDOWNS = primaryNavLinks.slice(0, 2); // Home, About
 const LINKS_AFTER_DROPDOWNS = primaryNavLinks.slice(2); // Academy, Knowledge Centre, Expert Pool, Careers, Contact
 
-// text-small (not text-body) keeps the desktop nav minimal/refined per
-// 02_UI_UX_and_Design_System.md §18 ("Desktop navigation should be minimal").
 const LINK_CLASSES =
   "rounded-md px-3 py-2 text-small font-medium text-foreground transition-colors hover:text-primary";
 
-/**
- * Sticky header per 02_UI_UX_and_Design_System.md §18: stays lightweight
- * while at the top of the page, becomes a solid/elevated bar once the user
- * scrolls, and never gets visually heavy.
- */
 export function Navbar({ solutions, products }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -88,11 +81,11 @@ export function Navbar({ solutions, products }: NavbarProps) {
 
         <button
           type="button"
-          onClick={() => setMobileOpen(true)}
+          onClick={() => setMobileOpen((prev) => !prev)}
           aria-label="Open menu"
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav-dialog"
-          className="text-foreground hover:bg-muted rounded-md p-2 md:hidden"
+          className="text-foreground hover:bg-muted active:scale-95 rounded-lg p-2 transition-transform cursor-pointer md:hidden"
         >
           <Menu className="size-6" aria-hidden="true" />
         </button>
