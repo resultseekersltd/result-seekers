@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\AdminExpertUserResource;
 use App\Models\ExpertUser;
+use App\Services\AuditLogger;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Admin-only Expert Pool management.
@@ -102,6 +104,8 @@ class ExpertPoolController extends Controller
             'reviewed_by' => $request->user()->id,
         ]);
 
+        AuditLogger::log('expert_pool.status_updated', $expert, ['status' => $request->status]);
+
         return response()->json([
             'message' => 'Profile status updated.',
             'data' => new AdminExpertUserResource($expert->fresh(['profile.disciplines', 'profile.experiences', 'profile.education'])),
@@ -118,9 +122,37 @@ class ExpertPoolController extends Controller
         $expert = ExpertUser::findOrFail($id);
         $expert->forceFill(['is_active' => $request->boolean('is_active')])->save();
 
+        AuditLogger::log(
+            $expert->is_active ? 'expert_pool.activated' : 'expert_pool.suspended',
+            $expert,
+        );
+
         return response()->json([
             'message' => $expert->is_active ? 'Account activated.' : 'Account suspended.',
             'is_active' => $expert->is_active,
         ]);
+    }
+
+    /**
+     * Stream the expert's CV to the admin. Mirrors
+     * Api\ExpertPool\CvController::download() (the expert's own download)
+     * and Api\Admin\AdminSubmissionsController::downloadJobApplicationCv()
+     * — files live on the private disk and are never publicly linkable.
+     */
+    public function downloadCv(int $id): mixed
+    {
+        $expert = ExpertUser::with('profile')->findOrFail($id);
+        $profile = $expert->profile;
+
+        if (! $profile || ! $profile->cv_path || ! Storage::disk('local')->exists($profile->cv_path)) {
+            return response()->json(['message' => 'No CV found.'], 404);
+        }
+
+        AuditLogger::log('expert_pool.cv_downloaded', $expert);
+
+        return Storage::disk('local')->download(
+            $profile->cv_path,
+            $profile->cv_original_name ?? 'cv.'.pathinfo($profile->cv_path, PATHINFO_EXTENSION),
+        );
     }
 }

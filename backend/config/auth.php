@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\ExpertUser;
+use App\Models\OrganisationUser;
 use App\Models\User;
 
 return [
@@ -80,6 +81,11 @@ return [
             'driver' => 'eloquent',
             'model' => ExpertUser::class,
         ],
+
+        'organisation_users' => [
+            'driver' => 'eloquent',
+            'model' => OrganisationUser::class,
+        ],
     ],
 
     /*
@@ -111,6 +117,13 @@ return [
 
         'expert_users' => [
             'provider' => 'expert_users',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'organisation_users' => [
+            'provider' => 'organisation_users',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

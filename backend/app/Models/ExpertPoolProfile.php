@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Enums\ExpertPoolProfileStatus;
+use App\Enums\ExpertVisibility;
+use App\Enums\VerificationLevel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -35,6 +37,8 @@ class ExpertPoolProfile extends Model
         'submitted_at',
         'reviewed_at',
         'reviewed_by',
+        'visibility_status',
+        'verification_level',
     ];
 
     protected function casts(): array
@@ -48,6 +52,8 @@ class ExpertPoolProfile extends Model
             'status' => ExpertPoolProfileStatus::class,
             'submitted_at' => 'datetime',
             'reviewed_at' => 'datetime',
+            'visibility_status' => ExpertVisibility::class,
+            'verification_level' => VerificationLevel::class,
         ];
     }
 
