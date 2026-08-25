@@ -7,15 +7,21 @@
  */
 
 import type {
+  Assessment,
+  AssignmentFeedback,
   AuthResponse,
+  Consent,
   ExpertDiscipline,
   ExpertEducation,
   ExpertExperience,
   ExpertProfile,
   ExpertUser,
+  Interview,
   LoginResponse,
   EducationPayload,
   ExperiencePayload,
+  Opportunity,
+  Placement,
   ProfileUpdatePayload,
 } from "@/types/expert-pool";
 
@@ -226,6 +232,124 @@ export async function downloadCv(): Promise<Blob> {
 
 export function deleteCv(): Promise<{ message: string }> {
   return bff<{ message: string }>("/cv", { method: "DELETE" });
+}
+
+// ─── Opportunities (Phase 2 — Managed Recruitment Pipeline) ───────────────────
+
+export function getOpportunities(): Promise<{ data: Opportunity[] }> {
+  return bff<{ data: Opportunity[] }>("/opportunities");
+}
+
+export function getOpportunity(id: string): Promise<{ data: Opportunity }> {
+  return bff<{ data: Opportunity }>(`/opportunities/${id}`);
+}
+
+export function respondToOpportunity(
+  id: string,
+  response: "accept" | "decline",
+  declineReason?: string,
+): Promise<{ data: Opportunity }> {
+  return bff<{ data: Opportunity }>(`/opportunities/${id}/respond`, {
+    method: "POST",
+    body: JSON.stringify({ response, decline_reason: declineReason }),
+  });
+}
+
+// ─── Consent (Phase 2 — Candidate Consent) ────────────────────────────────────
+
+export function getConsents(): Promise<{ data: Consent[] }> {
+  return bff<{ data: Consent[] }>("/consents");
+}
+
+export function respondToConsent(id: string, response: "grant" | "decline"): Promise<{ data: Consent }> {
+  return bff<{ data: Consent }>(`/consents/${id}/respond`, {
+    method: "POST",
+    body: JSON.stringify({ response }),
+  });
+}
+
+export function withdrawConsent(id: string): Promise<{ data: Consent }> {
+  return bff<{ data: Consent }>(`/consents/${id}/withdraw`, { method: "POST" });
+}
+
+// ─── Assessments (Phase 3) ─────────────────────────────────────────────────────
+
+export function getAssessments(): Promise<{ data: Assessment[] }> {
+  return bff<{ data: Assessment[] }>("/assessments");
+}
+
+export function getAssessment(id: string): Promise<{ data: Assessment }> {
+  return bff<{ data: Assessment }>(`/assessments/${id}`);
+}
+
+export function submitAssessment(id: string, payload: { response_text?: string; answers?: Record<string, unknown> }): Promise<{ data: Assessment }> {
+  return bff<{ data: Assessment }>(`/assessments/${id}/submit`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function submitAssessmentWithFile(
+  id: string,
+  payload: { response_text?: string; file: File },
+): Promise<{ data: Assessment }> {
+  const form = new FormData();
+  if (payload.response_text) form.append("response_text", payload.response_text);
+  form.append("file", payload.file);
+  return bffForm<{ data: Assessment }>(`/assessments/${id}/submit`, form);
+}
+
+export async function downloadAssessmentFile(assessmentId: string, submissionId: string): Promise<Blob> {
+  const res = await fetch(`/api/expert-pool/assessments/${assessmentId}/submissions/${submissionId}/file`, {
+    headers: { Accept: "*/*" },
+  });
+  if (!res.ok) {
+    const json = await res.json().catch(() => ({}));
+    throw new ExpertApiError(json.message ?? "Download failed", res.status);
+  }
+  return res.blob();
+}
+
+// ─── Interviews (Phase 3) ──────────────────────────────────────────────────────
+
+export function getInterviews(): Promise<{ data: Interview[] }> {
+  return bff<{ data: Interview[] }>("/interviews");
+}
+
+export function getInterview(id: string): Promise<{ data: Interview }> {
+  return bff<{ data: Interview }>(`/interviews/${id}`);
+}
+
+export function confirmInterview(id: string): Promise<{ data: Interview }> {
+  return bff<{ data: Interview }>(`/interviews/${id}/confirm`, { method: "POST" });
+}
+
+// ─── Placements & Feedback (Phase 4) ───────────────────────────────────────────
+
+export function getPlacements(): Promise<{ data: Placement[] }> {
+  return bff<{ data: Placement[] }>("/placements");
+}
+
+export function getPlacement(id: string): Promise<{ data: Placement }> {
+  return bff<{ data: Placement }>(`/placements/${id}`);
+}
+
+export function confirmPlacement(id: string): Promise<{ data: Placement }> {
+  return bff<{ data: Placement }>(`/placements/${id}/confirm`, { method: "POST" });
+}
+
+export function getFeedback(placementId: string): Promise<{ data: AssignmentFeedback[] }> {
+  return bff<{ data: AssignmentFeedback[] }>(`/placements/${placementId}/feedback`);
+}
+
+export function submitFeedback(
+  placementId: string,
+  payload: { rating?: number; comments?: string },
+): Promise<{ data: AssignmentFeedback }> {
+  return bff<{ data: AssignmentFeedback }>(`/placements/${placementId}/feedback`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
 }
 
 // ─── MFA ──────────────────────────────────────────────────────────────────────

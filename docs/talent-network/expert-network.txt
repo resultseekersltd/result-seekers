@@ -1,0 +1,572 @@
+ADDITIONAL MANDATORY BUSINESS AND PLATFORM REQUIREMENTS
+The Talent & Expert Network must be designed as a strategic Result Seekers business unit, not only as an applicant-tracking system.
+It should support the following connected opportunities:
+1.	Specialist recruitment
+2.	Talent Hunt
+3.	Managed recruitment
+4.	White-label recruitment
+5.	Recruitment Process Outsourcing
+6.	Project-team assembly
+7.	Proposal and consortium expert sourcing
+8.	Rapid field deployment
+9.	Executive search
+10.	Graduate and internship recruitment
+11.	Candidate assessments and verification
+12.	Temporary staffing and workforce outsourcing
+13.	Salary and talent intelligence
+14.	Training-to-employment pathways
+15.	Client retainers
+16.	Recruitment reporting and analytics
+WHITE-LABEL RECRUITMENT
+Implement a comprehensive white-label recruitment capability.
+This will allow Result Seekers to conduct a recruitment campaign using the client organisation’s approved branding while Result Seekers operates and manages the underlying recruitment technology and process.
+White-label recruitment should support:
+•	Client logo
+•	Client name
+•	Client colours
+•	Client typography where appropriate
+•	Campaign banner
+•	Campaign description
+•	Vacancy pages
+•	Application forms
+•	Candidate portal
+•	Client privacy wording
+•	Campaign-specific terms
+•	Client contact information
+•	Branded acknowledgement emails
+•	Branded interview invitations
+•	Branded assessment invitations
+•	Branded rejection messages
+•	Branded status notifications
+•	Branded reports
+•	Branded PDF exports
+•	Client-specific support information
+•	Client-specific analytics
+•	Custom application confirmation pages
+MULTI-TENANT ISOLATION
+Every white-label recruitment campaign must be isolated by organisation.
+Requirements:
+1.	One organisation must never see another organisation’s candidates, vacancies, reports, branding, communications, or analytics.
+2.	Enforce tenant isolation at the server and database-query levels.
+3.	Do not rely only on frontend filtering.
+4.	Every organisation-owned record must be associated with the correct tenant.
+5.	Authorisation tests must specifically test cross-organisation access attempts.
+6.	Administrative users must only access tenants within their assigned authority.
+7.	Super Admin access to client data must be audited.
+8.	Any cross-client reports must use aggregated and anonymised data.
+CUSTOM URLS AND DOMAINS
+Support:
+•	Result Seekers campaign subdomains
+•	Client-specific subdomains
+•	Client-owned custom domains
+•	Campaign-specific paths
+Examples:
+•	clientname.talent.result-seekers.com
+•	recruitment.clientname.org
+•	result-seekers.com/recruitment/clientname
+Custom-domain support must include:
+•	Domain verification
+•	DNS instructions
+•	SSL/TLS
+•	Ownership validation
+•	Domain-status monitoring
+•	Canonical URL management
+•	Safe fallback domain
+•	Domain removal
+•	Audit trail
+•	Prevention of unauthorised domain takeover
+Do not hardcode a domain structure that prevents future expansion.
+WHITE-LABEL BRANDING LEVELS
+Support configurable branding levels:
+LEVEL 1: RESULT SEEKERS MANAGED
+•	Result Seekers branding
+•	Client identified as the hiring organisation
+•	“Recruitment managed by Result Seekers”
+LEVEL 2: CO-BRANDED
+•	Client branding
+•	Result Seekers service attribution
+•	Both organisations visible
+LEVEL 3: FULL WHITE LABEL
+•	Client branding is dominant
+•	Result Seekers operates the platform in the background
+•	Result Seekers attribution is displayed only where contractually, ethically, or legally required
+Do not conceal the identity of the legal data controller, data processor, recruiter, or employment agency where disclosure is required.
+Allow administrators to configure branding at:
+•	Organisation level
+•	Campaign level
+•	Vacancy level
+EMAIL AND COMMUNICATION BRANDING
+White-label communications should support:
+•	Verified sending domain
+•	Sender name
+•	Reply-to address
+•	Client logo
+•	Client colours
+•	Email footer
+•	Result Seekers attribution rule
+•	Privacy links
+•	Support contact
+•	Campaign-specific templates
+Requirements:
+1.	Do not allow email-domain impersonation.
+2.	Require DNS verification before using a client sending domain.
+3.	Support SPF, DKIM and DMARC configuration.
+4.	Use a safe Result Seekers sending domain as the fallback.
+5.	Preserve a central communication history.
+6.	Clearly identify the relevant recruitment campaign.
+7.	Ensure candidates can verify that messages are legitimate.
+WHITE-LABEL ADMINISTRATION
+Result Seekers administrators should be able to:
+•	Create a client recruitment workspace
+•	Select a branding level
+•	Upload client-approved assets
+•	Configure colours
+•	Configure vacancy templates
+•	Configure form fields
+•	Configure candidate communication
+•	Configure privacy wording
+•	Configure assessment workflows
+•	Configure interview workflows
+•	Preview the campaign
+•	Request client approval
+•	Publish the campaign
+•	Pause the campaign
+•	Archive the campaign
+•	Export a campaign report
+Client administrators should be able to approve branding and content without receiving access to internal Result Seekers information.
+Create an approval workflow:
+1.	Draft
+2.	Internal review
+3.	Client review
+4.	Changes requested
+5.	Approved
+6.	Published
+7.	Paused
+8.	Closed
+9.	Archived
+PROPOSAL AND CONSORTIUM TALENT SOURCING
+Create a specialised workflow for organisations preparing Expressions of Interest, tenders, consortium proposals, grants, and technical bids.
+The workflow should support:
+•	Bid or opportunity name
+•	Donor or contracting authority
+•	Reference number
+•	Country
+•	Technical sectors
+•	Required expert positions
+•	Minimum qualifications
+•	Required experience
+•	Proposal deadline
+•	Anticipated project start
+•	Anticipated duration
+•	Availability requirements
+•	Exclusivity requirements
+•	Commitment-letter requirements
+•	CV format
+•	Required declarations
+•	Consent to include the professional in the proposal
+•	Proposal outcome
+Separate:
+•	Pre-award talent sourcing
+•	Post-award mobilisation
+PRE-AWARD
+Support:
+•	Anonymised talent search
+•	Candidate interest
+•	Availability confirmation
+•	Proposal-specific consent
+•	CV release
+•	CV formatting
+•	Commitment letters
+•	Exclusivity declarations where lawful
+•	Replacement candidates
+•	Deadline monitoring
+•	Proposal team matrix
+POST-AWARD
+Support:
+•	Availability reconfirmation
+•	Updated verification
+•	Contract negotiation
+•	Mobilisation
+•	Onboarding
+•	Deployment
+•	Timesheets where required
+•	Performance monitoring
+•	Replacement
+A candidate’s consent for one proposal must not be treated as general consent for unrelated proposals.
+NORTHERN NIGERIA TALENT GATEWAY
+Design the platform to support Result Seekers’ potential position as a leading source of verified technical and field professionals across Northern Nigeria while remaining nationally and internationally scalable.
+Support detailed geographic classification by:
+•	Country
+•	Geopolitical zone
+•	State
+•	LGA
+•	Ward or community where operationally necessary
+•	Current location
+•	Location of origin only where lawful and genuinely necessary
+•	Previous field experience
+•	Willingness to deploy
+•	Language
+•	Security training
+•	Access constraints
+•	Remote-work capability
+Never publicly expose precise residential addresses or sensitive location information.
+The platform should support talent mapping across:
+•	North West
+•	North East
+•	North Central
+•	South West
+•	South East
+•	South South
+Do not restrict the product architecture to Northern Nigeria.
+FIELD TEAM MOBILISATION
+Expand rapid deployment to support complete field-team exercises.
+Support:
+•	Multiple states
+•	Multiple LGAs
+•	Required headcount by location
+•	Roles by location
+•	Languages
+•	Gender-balance targets where lawful and operationally justified
+•	Training schedule
+•	Deployment dates
+•	Supervisor ratios
+•	Device requirements
+•	Travel requirements
+•	Security briefings
+•	Attendance
+•	Assessment
+•	Deployment confirmation
+•	Daily availability
+•	Performance feedback
+•	Incident reporting
+•	Replacement personnel
+•	Completion status
+Typical field roles include:
+•	Enumerators
+•	Supervisors
+•	Field coordinators
+•	Qualitative researchers
+•	Translators
+•	Community mobilisers
+•	GIS mappers
+•	Monitoring officers
+•	Data-quality officers
+•	Call-centre interviewers
+•	Assessment personnel
+GRADUATE, INTERNSHIP AND EMERGING-TALENT RECRUITMENT
+Create a configurable early-career recruitment module supporting:
+•	Graduate programmes
+•	Internships
+•	Trainee programmes
+•	Fellowships
+•	Apprenticeships
+•	ReSET Program
+•	University recruitment
+•	Entry-level recruitment campaigns
+Support:
+•	Cohorts
+•	Multiple recruitment stages
+•	Aptitude assessments
+•	Technical assessments
+•	Recorded or live interviews
+•	Group assessments
+•	Location preferences
+•	Department placement
+•	Internship duration
+•	Learning plans
+•	Supervisors
+•	Performance reviews
+•	Conversion to employment
+•	Cohort reports
+ReSET means:
+Result Seekers Emerging Talent Program
+ReSET should be able to feed approved professionals into the Talent & Expert Network, but completion must not guarantee employment or preferential treatment.
+TRAINING-TO-EMPLOYMENT ECOSYSTEM
+Prepare ethical integrations among:
+•	Result Seekers Academy
+•	ReSET Program
+•	Makaranta
+•	Talent & Expert Network
+•	Client recruitment
+•	Candidate assessments
+•	Professional-development recommendations
+Possible workflow:
+1.	Labour-market demand is identified.
+2.	Skills gaps are analysed.
+3.	Relevant training is developed.
+4.	Professionals participate voluntarily.
+5.	Skills are assessed separately.
+6.	Professionals decide whether to join the Talent Network.
+7.	Suitable professionals may be matched to opportunities.
+8.	Employers provide performance feedback.
+9.	Aggregated feedback informs future training.
+Requirements:
+•	Course payment must not guarantee employment.
+•	Training completion must not automatically produce verification.
+•	Assessment results must remain separate from commercial purchases.
+•	Clients must not be told that a candidate is qualified solely because they purchased an RS course.
+•	Professionals must consent before learning records are used in recruitment matching.
+TALENT AND SALARY INTELLIGENCE
+Prepare the platform to generate aggregated and anonymised intelligence on:
+•	Skills supply
+•	Skills demand
+•	Geographic availability
+•	Salary expectations
+•	Consultancy rates
+•	Recruitment timelines
+•	Time to shortlist
+•	Time to hire
+•	Candidate response rates
+•	Skills shortages
+•	Sector demand
+•	Work-arrangement preferences
+•	Training needs
+•	Field personnel rates
+•	Recruitment-source effectiveness
+Potential Result Seekers publications include:
+•	Nigeria Talent Outlook
+•	Northern Nigeria Talent Report
+•	MEAL and Research Salary Guide
+•	Data and GIS Talent Report
+•	Technology Skills Outlook
+•	Field Personnel Rate Benchmark
+•	Humanitarian Skills Availability Report
+Requirements:
+1.	Reports must use aggregated data.
+2.	Establish minimum group sizes before presenting statistics.
+3.	Suppress small groups that may reveal individuals.
+4.	Remove direct identifiers.
+5.	Do not sell identifiable candidate data.
+6.	Respect consent and stated processing purposes.
+7.	Allow management approval before publication.
+8.	Record the methodology, date range and limitations.
+9.	Distinguish expected salaries from confirmed placement salaries.
+10.	Do not present platform data as nationally representative without a valid methodology.
+SALARY BENCHMARKING SERVICE
+Support confidential client requests for:
+•	Salary benchmarks
+•	Consultancy-rate benchmarks
+•	Benefits comparisons
+•	Location premiums
+•	Scarce-skills analysis
+•	Recruitment feasibility
+•	Talent availability
+Benchmarking outputs should be controlled reports and should not expose individual candidate expectations.
+TEMPORARY STAFFING AND WORKFORCE OUTSOURCING
+Prepare the architecture for future temporary staffing but do not activate it until Result Seekers has the required legal, financial and operational capacity.
+Future capabilities may include:
+•	Worker contracts
+•	Client assignment agreements
+•	Assignment dates
+•	Timesheets
+•	Attendance
+•	Leave
+•	Expenses
+•	Payroll inputs
+•	Taxes
+•	Pensions where applicable
+•	Insurance
+•	Invoicing
+•	Client approval
+•	Worker payment status
+•	Performance
+•	Incidents
+•	Grievances
+•	Replacement
+•	Assignment closure
+Implement this behind a feature flag.
+Do not treat temporary staffing as ordinary recruitment. Clearly separate:
+•	Candidate
+•	Employee
+•	Independent consultant
+•	Temporary worker
+•	Deployed contractor
+•	Client employee
+Do not automatically determine legal worker classification. Require authorised review.
+RECRUITMENT CRM AND BUSINESS DEVELOPMENT
+Create a lightweight recruitment CRM or integrate with the existing Result Seekers business-development system.
+Support:
+•	Prospective client
+•	Organisation
+•	Contact
+•	Opportunity
+•	Service requested
+•	Estimated value
+•	Probability
+•	Expected closing date
+•	Proposal
+•	Follow-up
+•	Contract
+•	Account owner
+•	Recruitment assignment
+•	Renewal
+•	Cross-selling opportunity
+Track opportunities for:
+•	Recruitment
+•	Research
+•	MEAL
+•	Training
+•	Software
+•	Data and GIS
+•	Digital transformation
+•	Academy programmes
+•	Project-team support
+The CRM should help Result Seekers recognise when a recruitment client may also need other RS services, without sending inappropriate marketing communication.
+CLIENT RETAINERS AND ACCOUNT MANAGEMENT
+Support recruitment-retainer arrangements.
+A retainer may include:
+•	Defined number of vacancies
+•	Dedicated account manager
+•	Priority response
+•	Talent pipeline
+•	Recruitment reporting
+•	Regular talent intelligence
+•	Preferential service rates
+•	Scheduled recruitment reviews
+•	Rollover rules
+•	Usage limits
+•	Renewal date
+The system should track:
+•	Retainer period
+•	Included services
+•	Used services
+•	Remaining services
+•	Service-level commitments
+•	Renewal
+•	Client satisfaction
+•	Account profitability
+ASSIGNMENT PROFITABILITY
+Result Seekers must be able to understand whether each recruitment assignment is financially sustainable.
+Track:
+•	Quoted value
+•	Contract value
+•	Recruiter time
+•	Verifier time
+•	Advertising cost
+•	Assessment cost
+•	Communication cost
+•	Travel cost
+•	Partner cost
+•	Technology cost
+•	Refund or replacement exposure
+•	Tax
+•	Amount invoiced
+•	Amount received
+•	Outstanding balance
+•	Gross margin
+•	Estimated net contribution
+Financial details must be restricted to authorised Result Seekers users.
+PARTNER AND ASSOCIATE RECRUITER NETWORK
+Prepare for Result Seekers to work with approved regional recruiters, professional associations, universities, consultants, and mobilisation partners.
+Support:
+•	Partner organisation
+•	Partner contact
+•	Coverage area
+•	Disciplines
+•	Agreement
+•	Data-processing terms
+•	Sourcing assignment
+•	Candidate source
+•	Commission rule
+•	Performance
+•	Complaints
+•	Suspension
+•	Expiry
+Partners must not receive unrestricted database access.
+External recruiters must comply with candidate consent, privacy, anti-fraud, safeguarding and Result Seekers service standards.
+CANDIDATE SOURCE AND REDEPLOYMENT
+Track candidate sources such as:
+•	Direct registration
+•	Result Seekers Academy
+•	ReSET Program
+•	Staff referral
+•	Professional referral
+•	University
+•	Partner organisation
+•	Recruiter sourcing
+•	External application
+•	Previous RS project
+•	Client nomination
+Track previous deployment and performance without creating unfair permanent exclusion.
+Support:
+•	Assignment
+•	Role
+•	Dates
+•	Client
+•	Performance criteria
+•	Feedback source
+•	Candidate response
+•	Disputes
+•	Eligibility for redeployment
+•	Availability
+Do not allow one unverified negative comment to become an invisible permanent blacklist.
+EXTERNAL APPLICANTS
+A person should be able to apply for a client vacancy without first becoming a permanent Expert Pool member.
+After applying, the system may invite the person to join the Talent & Expert Network through a separate, voluntary consent process.
+Do not automatically enrol all applicants into the reusable talent database.
+REGULATORY AND LICENSING READINESS
+Create an internal compliance register covering:
+•	Recruiter’s licence
+•	Employer’s permit
+•	Domestic recruitment authorisation
+•	International recruitment authorisation
+•	Data-protection obligations
+•	Corporate registration
+•	Insurance
+•	Tax compliance
+•	Employment-law requirements
+•	Client due diligence
+•	Candidate-protection requirements
+•	Policy review dates
+•	Responsible officer
+•	Evidence documents
+•	Expiry dates
+•	Renewal reminders
+Do not publicly claim that Result Seekers is licensed until verified documentation has been entered and approved.
+Before enabling paid recruitment services, the system should allow Super Admin to confirm that required compliance conditions have been met.
+NO CANDIDATE PLACEMENT FEES
+Ordinary registration, matching and job placement should be free to professionals unless an authorised lawful business model is separately approved.
+Optional professional services such as CV review, training, interview preparation and career coaching must remain separate.
+The platform must clearly state:
+•	Paying for training does not guarantee employment.
+•	Paying for career services does not guarantee verification.
+•	Paying for career services does not guarantee shortlisting.
+•	Paying for career services does not improve a candidate’s match ranking.
+•	Result Seekers does not sell jobs.
+STRATEGIC CROSS-SELLING
+Recruitment relationships may identify legitimate opportunities for other Result Seekers services:
+•	Research
+•	MEAL
+•	Data analytics
+•	GIS
+•	Software engineering
+•	Digital transformation
+•	Institutional development
+•	Training
+•	Academy programmes
+Create a controlled business-development referral mechanism.
+Do not reuse candidate data for unrelated marketing without lawful authority and appropriate consent.
+PUBLIC POSITIONING
+The public website should present the service as:
+“Result Seekers helps development organisations, consulting firms, technology companies, businesses and project implementers find, assess and mobilise qualified professionals across Nigeria, with particular strength in research, MEAL, data, GIS, technology and field operations.”
+Supporting differentiator:
+“We do not simply forward CVs. We help organisations identify, assess, verify and mobilise professionals who can deliver.”
+Do not position Result Seekers as a general mass-market job board.
+WHITE-LABEL DEFINITION OF DONE
+White-label recruitment is complete only when:
+1.	Result Seekers can create an isolated client recruitment workspace.
+2.	The client can have approved branding.
+3.	The client can use a dedicated path, subdomain or verified custom domain.
+4.	Public vacancy and application pages reflect the approved branding.
+5.	Recruitment emails use approved client branding.
+6.	Reports support approved branding.
+7.	Result Seekers can manage the campaign centrally.
+8.	Client users see only their own information.
+9.	Candidate consent and privacy responsibilities remain enforceable.
+10.	Legal roles such as recruiter, data controller and data processor are not misleadingly concealed.
+11.	Tenant isolation has automated tests.
+12.	Custom-domain security has been verified.
+13.	Closing or removing a client campaign does not delete required recruitment records.
+14.	Result Seekers can revert the campaign to a safe default domain.
+15.	Branding configuration cannot inject unsafe code.
+

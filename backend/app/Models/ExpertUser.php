@@ -4,10 +4,12 @@ namespace App\Models;
 
 use App\Notifications\ExpertPool\ExpertResetPassword;
 use App\Notifications\ExpertPool\ExpertVerifyEmail;
+use Database\Factories\ExpertUserFactory;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -24,7 +26,8 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class ExpertUser extends Authenticatable implements CanResetPasswordContract, MustVerifyEmailContract
 {
-    use CanResetPassword, HasApiTokens, MustVerifyEmailTrait, Notifiable;
+    /** @use HasFactory<ExpertUserFactory> */
+    use CanResetPassword, HasApiTokens, HasFactory, MustVerifyEmailTrait, Notifiable;
 
     protected $fillable = [
         'name',

@@ -1,0 +1,1707 @@
+You are acting as a senior product architect, recruitment technology specialist, full-stack engineer, UX/UI designer, data-protection specialist, cybersecurity engineer, and quality-assurance lead.
+Your task is to transform the existing Result Seekers Expert Pool into a professional, secure, scalable, two-sided talent sourcing and managed recruitment platform.
+Do not build a simple job board or CV directory. Build a managed talent and recruitment ecosystem through which:
+1.	Professionals can create, maintain, and verify their profiles.
+2.	Result Seekers can search, assess, verify, shortlist, and deploy professionals.
+3.	Organisations can ask Result Seekers to find talent, recruit employees, assemble project teams, screen candidates, or manage complete recruitment exercises.
+4.	Candidate data remains protected and is released only through a controlled, consent-based process.
+5.	Result Seekers remains the trusted intermediary between organisations and professionals.
+PROJECT CONTEXT
+Website:
+https://result-seekers.onrender.com/
+Production domain:
+https://result-seekers.com
+Company:
+Result Seekers Ltd
+Existing module:
+Expert Pool
+New public service identity:
+Result Seekers Talent & Expert Network
+Recommended supporting description:
+“A verified talent platform and managed recruitment service connecting organisations with qualified professionals across Nigeria and beyond.”
+Brand positioning:
+Evidence. Intelligence. Innovation. Impact.
+Brand colours:
+•	Primary purple: #4214C4
+•	Orange accent: use the existing approved Result Seekers orange design token
+•	Preserve the existing Result Seekers visual identity
+DESIGN STANDARD
+The platform must be:
+•	Highly professional
+•	Premium but restrained
+•	Elegant
+•	Mature
+•	Simple to navigate
+•	Responsive
+•	Accessible
+•	Secure
+•	Trustworthy
+•	Suitable for NGOs, consulting firms, government organisations, development partners, educational institutions, humanitarian organisations, businesses, and international clients
+Avoid:
+•	Generic job-board appearance
+•	Excessive gradients
+•	Excessive animations
+•	Oversized decorative headings
+•	Glassmorphism everywhere
+•	Unnecessary dashboards
+•	Dense, confusing forms
+•	Public exposure of candidates’ personal information
+•	AI-generated design clutter
+•	Unverified claims
+•	Invented company information
+•	Discriminatory automated recruitment decisions
+CORE PRODUCT PRINCIPLE
+The platform must support two connected but distinct business activities:
+1.	Talent and Expert Network
+2.	Managed Recruitment Services
+Professionals should be able to register for free, create verified profiles, express availability, and consent to relevant opportunities.
+Organisations should be able to request talent and recruitment services, but they must not receive unrestricted access to browse, harvest, download, or contact the entire professional database.
+Result Seekers must control candidate introductions, verification, shortlisting, and data release.
+MANDATORY WORKING INSTRUCTIONS
+1.	Inspect the entire existing repository before editing.
+2.	Understand the current architecture, framework, database, authentication, APIs, storage, forms, permissions, design system, deployment process, and Expert Pool implementation.
+3.	Preserve existing working features.
+4.	Extend or refactor existing functionality rather than creating an unrelated second system.
+5.	Use the existing design system and shared components.
+6.	Use the project’s established programming language, framework, database, ORM, validation library, and authentication approach where technically appropriate.
+7.	Do not hardcode content that should be configurable.
+8.	Do not introduce unnecessary dependencies.
+9.	Do not expose secrets or personal information.
+10.	Do not invent candidates, clients, organisations, projects, statistics, testimonials, addresses, telephone numbers, or recruitment results.
+11.	Implement real database-backed workflows, not static mockups.
+12.	Implement frontend, backend, database, permissions, notifications, auditability, validation, security, and tests.
+13.	Do not stop after producing a plan.
+14.	Run and verify the implementation.
+15.	If a business-critical decision cannot safely be inferred, create a configurable default and document it clearly.
+PHASE 1: AUDIT AND ARCHITECTURE
+Before implementing:
+1.	Map all existing Expert Pool routes.
+2.	Inspect professional registration and login.
+3.	Inspect profile management.
+4.	Inspect document uploads.
+5.	Inspect authentication and authorisation.
+6.	Inspect database schemas and migrations.
+7.	Inspect notification mechanisms.
+8.	Inspect administrator functionality.
+9.	Inspect current public Expert Pool pages.
+10.	Identify unfinished or placeholder functionality.
+11.	Identify security vulnerabilities.
+12.	Identify privacy risks.
+13.	Identify duplicated or inconsistent code.
+14.	Identify whether organisations or recruiters already exist as user types.
+15.	Identify how the system manages roles and permissions.
+Then create an internal implementation plan and execute it.
+PLATFORM USERS AND ROLES
+Implement a robust role and permission system.
+Required user roles:
+1.	Professional
+2.	Organisation Representative
+3.	Result Seekers Recruiter
+4.	Verifier
+5.	Recruitment Manager
+6.	Super Admin
+Optional future-ready roles:
+•	Interview Panel Member
+•	Assessment Reviewer
+•	Finance Officer
+•	Client Account Manager
+•	Read-only Auditor
+Do not use only frontend route hiding. All permissions must be enforced server-side.
+PROFESSIONAL ROLE
+Professionals should be able to:
+•	Register
+•	Verify their email
+•	Sign in securely
+•	Reset passwords
+•	Complete and update their profile
+•	Upload CV and credentials
+•	Select disciplines
+•	Add skills
+•	Add work experience
+•	Add education
+•	Add certifications
+•	Add languages
+•	Add geographic experience
+•	Add sector experience
+•	Add portfolio links
+•	Add referees
+•	Set preferred engagement types
+•	Set work arrangement preferences
+•	Set availability
+•	Set willingness to travel
+•	Set preferred locations
+•	Provide salary or rate expectations privately
+•	Control profile visibility
+•	Review opportunity invitations
+•	Accept or decline introductions
+•	Give consent before data is shared
+•	Track applications and assignments
+•	View verification progress
+•	Respond to requests for clarification
+•	Update or withdraw consent
+•	Request account deletion
+•	Download a copy of their data
+•	Report suspicious organisations or opportunities
+•	Manage notification preferences
+ORGANISATION REPRESENTATIVE ROLE
+Organisation users should be able to:
+•	Register an organisation account
+•	Verify their official email
+•	Submit organisation details
+•	Upload supporting verification documents
+•	Request talent
+•	Request full recruitment support
+•	Request project-team assembly
+•	Request executive search
+•	Request rapid field deployment
+•	Submit multiple vacancies
+•	Track active recruitment assignments
+•	View approved shortlists
+•	Review candidate profiles authorised for release
+•	Score shortlisted candidates
+•	Add private internal comments
+•	Schedule interviews
+•	Submit interview feedback
+•	Record hiring decisions
+•	Request replacement support where contractually applicable
+•	Download authorised recruitment reports
+•	View contracts, quotations, or invoices when those modules become available
+•	Manage organisation team members and permissions
+•	Communicate with the assigned Result Seekers recruitment team
+Organisation users must not be able to:
+•	Browse the entire candidate database
+•	Download candidate lists
+•	Harvest email addresses
+•	View identity documents
+•	View verification documents
+•	View private salary or rate information unless authorised
+•	Contact professionals without a controlled introduction
+•	See recruiter-only notes
+•	See other organisations’ requests
+•	Export unapproved personal data
+RESULT SEEKERS RECRUITER ROLE
+Recruiters should be able to:
+•	Receive and review talent requests
+•	Clarify client requirements
+•	Create recruitment assignments
+•	Create job descriptions
+•	Advertise opportunities
+•	Search the professional database
+•	Build longlists
+•	Build shortlists
+•	Add internal notes
+•	Invite professionals
+•	Request candidate consent
+•	Conduct preliminary screening
+•	Create screening questions
+•	Schedule assessments
+•	Schedule interviews
+•	Record outcomes
+•	Present authorised profiles to clients
+•	Manage candidate communication
+•	Manage client communication
+•	Track recruitment stages
+•	Generate recruitment reports
+•	Close assignments
+•	Collect post-placement feedback
+VERIFIER ROLE
+Verifiers should be able to:
+•	Review identity information
+•	Review education records
+•	Review certifications
+•	Review employment history
+•	Review references
+•	Request clarification
+•	Record verification evidence
+•	Approve or reject individual verification checks
+•	Add internal verification notes
+•	Flag suspected fraud
+•	Escalate cases
+Verifiers should only see information necessary for their assigned verification tasks.
+RECRUITMENT MANAGER ROLE
+Recruitment Managers should be able to:
+•	Assign recruiters and verifiers
+•	Approve recruitment strategies
+•	Approve shortlists
+•	Review recruitment quality
+•	Approve candidate release
+•	Approve assignment closure
+•	Manage escalations
+•	Review complaints
+•	Monitor service-level targets
+•	View recruitment analytics
+•	Manage replacement cases
+•	Approve sensitive or executive-search workflows
+SUPER ADMIN ROLE
+Super Admin should be able to:
+•	Manage users
+•	Manage organisations
+•	Manage roles and permissions
+•	Manage disciplines and skill taxonomies
+•	Manage verification settings
+•	Manage recruitment workflows
+•	Manage service packages
+•	Manage platform configuration
+•	Manage content
+•	Review audit logs
+•	Review security events
+•	Suspend users or organisations
+•	Manage complaints and appeals
+•	Configure notifications
+•	Configure data retention
+•	Export authorised reports
+•	Manage privacy requests
+•	Manage system-wide analytics
+PROFESSIONAL PROFILE
+Create a comprehensive but user-friendly professional profile.
+Required sections:
+1.	Basic information
+2.	Professional headline
+3.	Professional summary
+4.	Current location
+5.	Nationality and work authorisation where relevant
+6.	Contact information
+7.	Disciplines
+8.	Skills
+9.	Employment history
+10.	Consultancy history
+11.	Education
+12.	Certifications
+13.	Languages
+14.	Sector experience
+15.	Geographic experience
+16.	Software and technical tools
+17.	Portfolio and professional links
+18.	Publications
+19.	Training and facilitation experience
+20.	References
+21.	Availability
+22.	Engagement preferences
+23.	Work arrangement preferences
+24.	Travel preferences
+25.	Rate or salary expectations
+26.	CV
+27.	Credentials and supporting documents
+28.	Privacy and visibility settings
+29.	Verification status
+30.	Assignment history
+31.	Performance history visible only to authorised staff
+32.	Consent history
+Supported engagement types:
+•	Permanent employment
+•	Fixed-term employment
+•	Consultancy
+•	Short-term contract
+•	Long-term contract
+•	Part-time assignment
+•	Remote assignment
+•	Field deployment
+•	Training and facilitation
+•	Technical advisory
+•	Proposal or consortium opportunity
+•	Emergency deployment
+•	Internship or early-career opportunity
+PROFILE COMPLETION
+Implement a transparent profile-completion indicator.
+Do not treat all fields as mandatory.
+Group fields into:
+•	Required to register
+•	Required for verification
+•	Recommended
+•	Opportunity-specific
+•	Sensitive and optional
+Show professionals why particular information is requested.
+Allow saving and returning later.
+Use autosave where safe and appropriate.
+Do not lose previously entered information following validation errors or session interruptions.
+DISCIPLINES AND TALENT TAXONOMY
+Create an administrator-managed taxonomy.
+Initial high-level disciplines should include:
+•	Research
+•	Monitoring, Evaluation, Accountability and Learning
+•	Data Management
+•	Data Analytics
+•	Statistics
+•	Artificial Intelligence
+•	Machine Learning
+•	GIS and Geospatial Analysis
+•	Information Management
+•	Software Engineering
+•	Web Development
+•	Mobile Application Development
+•	Cybersecurity
+•	Cloud and DevOps
+•	Digital Transformation
+•	Project Management
+•	Programme Management
+•	Humanitarian Response
+•	Public Health
+•	Health Information Management
+•	Education
+•	Agriculture
+•	Livelihoods
+•	Protection
+•	Gender and Inclusion
+•	Communications
+•	Graphic Design
+•	Finance
+•	Administration
+•	Human Resources
+•	Procurement
+•	Logistics
+•	Supply Chain
+•	Training and Facilitation
+•	Translation and Interpretation
+•	Field Data Collection
+•	Community Engagement
+•	Governance
+•	Policy
+•	Environmental Management
+•	Climate Change
+•	Renewable Energy
+•	Engineering
+•	Legal and Compliance
+Administrators must be able to add, merge, rename, deactivate, or reorganise disciplines and skills without code changes.
+VERIFICATION SYSTEM
+Do not represent every registered user as verified.
+Implement verification levels:
+1.	Registered
+2.	Profile Reviewed
+3.	Identity Verified
+4.	Credentials Verified
+5.	Experience Verified
+6.	References Verified
+7.	Skills Assessed
+8.	Previously Deployed
+9.	Preferred Expert
+Verification must be granular.
+Examples:
+•	Identity verified
+•	Degree verified
+•	Certification verified
+•	Employer verified
+•	Reference completed
+•	Skills assessment completed
+Each check should record:
+•	Verification type
+•	Subject
+•	Status
+•	Verifier
+•	Date started
+•	Date completed
+•	Evidence reviewed
+•	Method used
+•	Internal notes
+•	Expiry date where applicable
+•	Reason for rejection or inability to verify
+•	Audit trail
+Supported statuses:
+•	Not started
+•	Pending
+•	Under review
+•	Clarification requested
+•	Verified
+•	Partially verified
+•	Unable to verify
+•	Rejected
+•	Expired
+•	Revoked
+A verified badge must clearly indicate what has been verified. It must not imply that Result Seekers guarantees the person’s future performance or conduct.
+ORGANISATION REGISTRATION AND VERIFICATION
+Create an organisation onboarding workflow.
+Collect:
+•	Legal organisation name
+•	Trading name
+•	Organisation type
+•	Sector
+•	Country
+•	State or region
+•	Registered address
+•	Website
+•	Official email domain
+•	Contact person
+•	Contact person’s position
+•	Telephone
+•	Registration number
+•	Tax or regulatory information where applicable
+•	Organisation profile
+•	Supporting documents
+•	Recruitment needs
+•	Agreement to organisation terms
+•	Data-use commitments
+Organisation verification should include configurable checks such as:
+•	Email domain verification
+•	Website verification
+•	Registration-document review
+•	Contact-person verification
+•	Telephone verification
+•	Sanctions or fraud checks where legally appropriate
+•	Manual Result Seekers approval
+Organisation statuses:
+•	Draft
+•	Pending verification
+•	Clarification requested
+•	Verified
+•	Rejected
+•	Suspended
+•	Restricted
+•	Archived
+Only verified organisations should receive candidate-identifying information.
+TALENT AND RECRUITMENT SERVICES
+Implement the following services.
+SERVICE 1: TALENT HUNT
+For clients that need a qualified shortlist and will manage final interviews and selection.
+Possible deliverables:
+•	Requirement consultation
+•	Talent search
+•	Availability confirmation
+•	Candidate consent
+•	Preliminary screening
+•	Curated shortlist
+•	Candidate introduction
+SERVICE 2: MANAGED RECRUITMENT
+Result Seekers manages most or all of the recruitment process.
+Possible services:
+•	Job-description development
+•	Vacancy advertising
+•	Application management
+•	Longlisting
+•	Screening
+•	Qualification verification
+•	Technical assessment
+•	Written assessment
+•	Interview coordination
+•	Reference checks
+•	Final shortlist
+•	Recruitment report
+•	Offer support
+•	Onboarding support
+The client remains responsible for the final hiring decision unless a signed agreement says otherwise.
+SERVICE 3: PROJECT TEAM ASSEMBLY
+Result Seekers assembles complete project teams such as:
+•	Research teams
+•	MEAL teams
+•	Data-collection teams
+•	GIS teams
+•	Software-development teams
+•	Training teams
+•	Project-management teams
+•	Finance and administration teams
+•	Public-health teams
+•	Education teams
+•	Humanitarian-response teams
+SERVICE 4: RAPID FIELD DEPLOYMENT
+Support location-based mobilisation of:
+•	Enumerators
+•	Supervisors
+•	Field coordinators
+•	Monitoring officers
+•	Interviewers
+•	Translators
+•	Community mobilisers
+•	GIS mappers
+•	Data-quality officers
+•	Assessment personnel
+Search filters should include:
+•	State
+•	LGA or equivalent administrative area
+•	Language
+•	Availability
+•	Field experience
+•	Security training
+•	Technical competence
+•	Travel willingness
+•	Verification status
+•	Previous performance
+Do not use gender or other protected characteristics as default ranking criteria. Only allow legally permissible, contextually justified requirements with proper authorisation and documentation.
+SERVICE 5: EXECUTIVE AND SPECIALIST SEARCH
+Support confidential searches for:
+•	Directors
+•	Programme leads
+•	Heads of MEAL
+•	Technical advisers
+•	Senior researchers
+•	Senior data specialists
+•	Artificial-intelligence specialists
+•	GIS specialists
+•	Technology leaders
+•	Institutional development advisers
+•	Other difficult-to-fill senior roles
+Add enhanced confidentiality controls.
+SERVICE 6: RECRUITMENT PROCESS OUTSOURCING
+Support organisations retaining Result Seekers to manage multiple vacancies or recurring recruitment cycles.
+Possible features:
+•	Multiple vacancies
+•	Branded recruitment campaign
+•	Client-specific application portal
+•	Candidate pipeline
+•	Assessment management
+•	Interview management
+•	Recruitment analytics
+•	Dedicated account manager
+•	Service-level tracking
+•	Periodic reports
+ORGANISATION TALENT REQUEST
+Create a guided, multi-step talent request form.
+Collect:
+1.	Organisation
+2.	Requesting contact
+3.	Service required
+4.	Position or assignment title
+5.	Number of professionals required
+6.	Department
+7.	Location
+8.	Remote, hybrid, onsite, or field arrangement
+9.	Employment or contract type
+10.	Duration
+11.	Expected start date
+12.	Deadline
+13.	Role description
+14.	Responsibilities
+15.	Essential qualifications
+16.	Desirable qualifications
+17.	Required years of experience
+18.	Required skills
+19.	Sector experience
+20.	Language requirements
+21.	Geographic experience
+22.	Travel requirements
+23.	Salary or budget range
+24.	Confidentiality requirements
+25.	Assessment requirements
+26.	Verification requirements
+27.	Diversity or inclusion considerations where lawful
+28.	Supporting documents
+29.	Additional information
+After submission:
+•	Generate a unique reference number.
+•	Send a confirmation.
+•	Notify the relevant Result Seekers team.
+•	Allow the organisation to track the request.
+•	Allow Result Seekers to request clarification.
+•	Allow assignment of a recruiter.
+•	Maintain a complete audit trail.
+RECRUITMENT ASSIGNMENT WORKFLOW
+Implement configurable stages:
+1.	Request submitted
+2.	Organisation verification
+3.	Initial consultation
+4.	Scope clarification
+5.	Proposal or quotation
+6.	Agreement pending
+7.	Agreement signed
+8.	Assignment opened
+9.	Vacancy prepared
+10.	Sourcing
+11.	Applications open
+12.	Longlisting
+13.	Screening
+14.	Candidate consent
+15.	Verification
+16.	Assessment
+17.	Shortlisting
+18.	Client review
+19.	Interview
+20.	Reference check
+21.	Final selection
+22.	Offer
+23.	Placement
+24.	Onboarding follow-up
+25.	Guarantee or replacement period
+26.	Assignment completed
+27.	Assignment cancelled
+28.	Assignment archived
+Administrators should be able to configure which stages apply to each service type.
+PIPELINE AND CANDIDATE MANAGEMENT
+Build a recruitment pipeline where authorised staff can:
+•	Add professionals from the Expert Pool
+•	Add external applicants
+•	Move candidates between stages
+•	Add structured notes
+•	Add tags
+•	Record screening outcomes
+•	Record assessment scores
+•	Record interview scores
+•	Assign reviewers
+•	Request verification
+•	Request consent
+•	Schedule activities
+•	Send templated communication
+•	Record rejection reasons
+•	Record withdrawal
+•	Record no response
+•	Mark hired or placed
+•	Maintain an audit log
+Avoid uncontrolled drag-and-drop changes. Important status transitions should require confirmation and should be logged.
+CANDIDATE CONSENT AND DATA RELEASE
+This is a mandatory privacy requirement.
+Before Result Seekers releases identifiable candidate information to an organisation:
+1.	Present the opportunity to the professional.
+2.	Identify the organisation unless confidentiality has been legitimately agreed.
+3.	Explain what information will be shared.
+4.	Request explicit consent.
+5.	Allow acceptance or decline.
+6.	Record the consent decision.
+7.	Record the privacy-policy and consent-text version.
+8.	Record the date and purpose.
+9.	Release only the approved information.
+10.	Allow consent withdrawal where legally possible.
+The organisation should initially receive an anonymised candidate profile containing only appropriate information such as:
+•	Candidate reference
+•	Professional title
+•	Experience range
+•	Skills
+•	Qualifications
+•	Sector experience
+•	Geographic experience
+•	General location
+•	Languages
+•	Verification level
+•	Availability
+Do not release without authorisation:
+•	Personal email
+•	Telephone number
+•	Home address
+•	Identity documents
+•	Certificates
+•	Referee contact information
+•	Private recruiter notes
+•	Verification evidence
+•	Sensitive personal information
+•	Private salary or rate expectations
+•	Full CV
+•	Current employer details where confidential
+Create a controlled candidate-release record showing exactly what was shared, with whom, why, and when.
+CANDIDATE VISIBILITY
+Support profile visibility settings:
+•	Private
+•	Visible only to Result Seekers recruiters
+•	Available for anonymous matching
+•	Available for approved opportunities
+•	Temporarily unavailable
+•	Archived
+Professionals must not be publicly searchable by name unless a separate explicit public-profile option is introduced with informed consent.
+MATCHING SYSTEM
+Start with a structured, explainable matching engine.
+Potential matching criteria:
+•	Required skills
+•	Preferred skills
+•	Years of experience
+•	Education
+•	Certifications
+•	Sector experience
+•	Geographic experience
+•	Location
+•	Languages
+•	Availability
+•	Work arrangement
+•	Travel willingness
+•	Salary or rate alignment
+•	Verification level
+•	Assessment results
+•	Previous deployment history
+•	Previous performance
+•	Engagement preference
+Requirements:
+1.	Separate mandatory criteria from preferred criteria.
+2.	Display an explainable match score.
+3.	Show why a person matched.
+4.	Show important missing requirements.
+5.	Allow recruiter overrides.
+6.	Record manual overrides.
+7.	Never automatically reject a person solely based on an opaque AI score.
+8.	Do not use protected characteristics in general ranking.
+9.	Support configuration of scoring weights.
+10.	Prevent incomplete or unverified data from being treated as confirmed.
+AI-ASSISTED FEATURES
+AI may assist with:
+•	CV parsing
+•	Skill extraction
+•	Experience summarisation
+•	Job-description analysis
+•	Candidate-job matching recommendations
+•	Interview-question generation
+•	Screening-question generation
+•	Duplicate profile detection
+•	Potential inconsistency detection
+•	Recruitment-report drafting
+•	Candidate-summary drafting
+AI must not:
+•	Make final hiring decisions
+•	Automatically reject candidates without human review
+•	Infer ethnicity, religion, disability, pregnancy, political affiliation, or other sensitive characteristics
+•	Fabricate qualifications or experience
+•	Rewrite candidate information as verified facts
+•	expose personal data to unapproved third parties
+•	Use candidate data for model training without lawful authority and explicit governance
+•	Rank candidates through unexplained criteria
+Every AI-generated output must be identified as an assistance tool and remain subject to human review.
+ASSESSMENTS
+Build a future-ready assessment module supporting:
+•	Screening questions
+•	Multiple-choice tests
+•	Written responses
+•	File submissions
+•	Technical assignments
+•	Interview scorecards
+•	Panel assessments
+•	Practical assessments
+•	Language assessments
+•	Custom assessment templates
+Each assessment should support:
+•	Instructions
+•	Time limit
+•	Start and closing time
+•	Attempt limits
+•	Reasonable accommodation
+•	Scoring rules
+•	Manual review
+•	Reviewer assignment
+•	Candidate status
+•	Result visibility
+•	Audit trail
+Do not implement intrusive or unreliable AI proctoring.
+INTERVIEW MANAGEMENT
+Support:
+•	Interview type
+•	Date and time
+•	Time zone
+•	Location or meeting link
+•	Interview panel
+•	Candidate confirmation
+•	Reminders
+•	Interview scorecard
+•	Structured questions
+•	Competency areas
+•	Panel comments
+•	Overall recommendation
+•	Conflict-of-interest declaration
+Do not expose one panel member’s private scoring to another before submission if independent scoring is required.
+REFERENCE CHECKING
+Reference checks require candidate consent.
+Support:
+•	Referee details
+•	Relationship to candidate
+•	Organisation
+•	Contact method
+•	Consent record
+•	Reference questionnaire
+•	Date contacted
+•	Response status
+•	Verification notes
+•	Risk flags
+•	Final outcome
+Do not allow organisations to see referee personal information unless specifically authorised.
+COMMUNICATIONS
+Implement secure, template-based communications for:
+•	Registration
+•	Email verification
+•	Profile completion
+•	Verification request
+•	Clarification request
+•	Verification outcome
+•	Opportunity invitation
+•	Consent request
+•	Application acknowledgement
+•	Screening invitation
+•	Assessment invitation
+•	Interview invitation
+•	Interview reminder
+•	Status update
+•	Rejection
+•	Shortlisting
+•	Selection
+•	Offer support
+•	Assignment follow-up
+•	Organisation request confirmation
+•	Organisation verification
+•	Client shortlist notification
+•	Recruitment completion
+•	Complaint acknowledgement
+•	Data-request acknowledgement
+Requirements:
+•	Configurable templates
+•	Email and in-platform notifications
+•	Optional SMS/WhatsApp readiness
+•	Notification preferences
+•	Communication history
+•	Secure links
+•	Expiry times
+•	No sensitive information in email subject lines
+•	No disclosure of other candidates
+•	Accessible content
+•	British English
+Do not send real external messages during development or automated tests.
+DASHBOARDS
+PROFESSIONAL DASHBOARD
+Show:
+•	Profile completion
+•	Verification status
+•	Availability
+•	Opportunity invitations
+•	Active applications
+•	Upcoming assessments
+•	Upcoming interviews
+•	Consent requests
+•	Notifications
+•	Required actions
+•	Recent activity
+ORGANISATION DASHBOARD
+Show:
+•	Organisation verification
+•	Talent requests
+•	Recruitment assignments
+•	Assignment stages
+•	Shortlists awaiting review
+•	Interviews
+•	Decisions required
+•	Assigned Result Seekers contact
+•	Recent communication
+•	Reports and approved documents
+RECRUITER DASHBOARD
+Show:
+•	Assigned requests
+•	Active assignments
+•	Pending candidate consent
+•	Pending screening
+•	Pending shortlists
+•	Upcoming interviews
+•	Overdue actions
+•	Client response delays
+•	Candidate response delays
+•	Verification requests
+•	Recruitment funnel
+•	Service-level indicators
+VERIFIER DASHBOARD
+Show:
+•	Assigned verification cases
+•	Pending reviews
+•	Clarifications
+•	Expiring verification checks
+•	Fraud flags
+•	Completed checks
+•	Workload
+MANAGEMENT DASHBOARD
+Show aggregated, privacy-conscious metrics:
+•	Registered professionals
+•	Verified professionals
+•	Active professionals
+•	Organisations
+•	Verified organisations
+•	Talent requests
+•	Active assignments
+•	Time to shortlist
+•	Time to hire
+•	Candidate response rate
+•	Interview-to-selection rate
+•	Placement rate
+•	Assignment completion
+•	Replacement requests
+•	Sectors
+•	Skills demand
+•	Geographic talent distribution
+•	Recruiter workload
+•	Client satisfaction
+•	Candidate satisfaction
+Do not expose unnecessary personal data in analytics.
+PUBLIC WEBSITE STRUCTURE
+Update the existing Result Seekers website navigation.
+Recommended section name:
+Talent & Experts
+Recommended public routes:
+•	/talent
+•	/talent/for-professionals
+•	/talent/for-organisations
+•	/talent/recruitment-services
+•	/talent/request
+•	/talent/project-teams
+•	/talent/rapid-deployment
+•	/talent/executive-search
+•	/expert-pool/register
+•	/expert-pool/login
+•	/organisation/register
+•	/organisation/login
+Preserve legacy Expert Pool URLs through appropriate redirects where necessary.
+PUBLIC TALENT LANDING PAGE
+The main page should include:
+1.	Hero
+2.	Two clear user pathways
+3.	Services
+4.	Disciplines
+5.	How it works
+6.	Verification approach
+7.	Candidate privacy commitment
+8.	Organisation benefits
+9.	Professional benefits
+10.	Service-specific CTAs
+11.	Frequently asked questions
+12.	Contact CTA
+Suggested hero:
+Headline:
+Find the expertise your organisation needs.
+Supporting text:
+Result Seekers helps organisations identify, verify and recruit qualified professionals for permanent roles, consultancy assignments, project teams and rapid field deployment.
+Primary CTA:
+Request Talent
+Secondary CTA:
+Join the Expert Pool
+Add a third contextual action:
+Explore Recruitment Services
+FOR PROFESSIONALS PAGE
+Explain:
+•	Who may join
+•	Types of opportunities
+•	Disciplines
+•	Verification
+•	Profile requirements
+•	Candidate consent
+•	Data protection
+•	What approval means
+•	What approval does not mean
+•	How matching works
+•	How to register
+Explicitly state:
+“Inclusion in the Result Seekers Talent & Expert Network does not guarantee employment or assignment.”
+FOR ORGANISATIONS PAGE
+Explain:
+•	Talent Hunt
+•	Full Recruitment
+•	Project Team Assembly
+•	Rapid Field Deployment
+•	Executive Search
+•	Recruitment Process Outsourcing
+•	Verification
+•	Candidate consent
+•	Service process
+•	Confidentiality
+•	Request submission
+•	Consultation
+Do not publish pricing unless approved.
+SERVICE PACKAGES
+Create configurable service-package structures:
+1.	Talent Search
+2.	Full Recruitment
+3.	Project Team
+4.	Executive Search
+5.	Recruitment Partner
+6.	Rapid Deployment
+Each package should support:
+•	Name
+•	Description
+•	Target client
+•	Included services
+•	Exclusions
+•	Delivery timeline
+•	Pricing model
+•	Active/inactive status
+•	Enquiry CTA
+Do not hardcode final fees.
+COMMERCIAL SYSTEM READINESS
+Prepare the system for:
+•	Fixed sourcing fees
+•	Per-vacancy fees
+•	Success fees
+•	Percentage-of-salary fees
+•	Percentage-of-contract fees
+•	Project-team mobilisation fees
+•	Management fees
+•	Monthly retainers
+•	Quarterly retainers
+•	Annual retainers
+•	Assessment fees
+•	Verification fees
+•	Replacement support
+Professionals should ordinarily register for free.
+Optional paid professional services may later include:
+•	CV improvement
+•	Interview preparation
+•	Career coaching
+•	Skills assessments
+•	Professional training
+Purchasing optional professional services must not guarantee:
+•	Verification
+•	Shortlisting
+•	Preferential ranking
+•	Employment
+•	Consultancy assignments
+REPLACEMENT AND GUARANTEE SUPPORT
+Build configurable support for a replacement period after permanent recruitment.
+Do not automatically promise a refund.
+Allow administrators to configure:
+•	Guarantee duration
+•	Applicable service packages
+•	Eligibility requirements
+•	Exclusions
+•	Client-notification deadline
+•	Replacement status
+•	Replacement assignment
+•	Outcome
+•	Management approval
+The final legal terms must remain configurable and subject to signed agreements.
+COMPLAINTS, APPEALS, AND REPORTING
+Create workflows for:
+•	Candidate complaint
+•	Organisation complaint
+•	Verification appeal
+•	Recruitment-process complaint
+•	Harassment report
+•	Fraud report
+•	Data misuse report
+•	Discrimination concern
+•	Technical issue
+•	Privacy request
+Each case should have:
+•	Reference number
+•	Category
+•	Priority
+•	Confidentiality level
+•	Assigned officer
+•	Status
+•	Timeline
+•	Evidence
+•	Internal notes
+•	Communication log
+•	Resolution
+•	Appeal status
+•	Audit history
+Highly sensitive cases must have restricted access.
+PRIVACY AND DATA PROTECTION
+Design for compliance with applicable Nigerian data-protection requirements and appropriate international standards.
+Implement:
+•	Privacy notice
+•	Professional terms
+•	Organisation terms
+•	Candidate consent
+•	Verification consent
+•	Reference-check consent
+•	Data-release consent
+•	Communication preferences
+•	Data-access request
+•	Correction request
+•	Deletion request
+•	Processing-objection request
+•	Consent withdrawal
+•	Data export
+•	Retention rules
+•	Deletion or anonymisation workflow
+•	Consent-version history
+•	Processing-purpose records
+•	Audit logs
+Important:
+1.	Do not collect information without a defined purpose.
+2.	Minimise sensitive information.
+3.	Do not expose personal data publicly.
+4.	Do not use uploaded documents as public assets.
+5.	Keep private documents in protected storage.
+6.	Use signed, expiring download URLs.
+7.	Log sensitive document access.
+8.	Prevent unauthorised bulk exports.
+9.	Require explicit authorisation for administrative exports.
+10.	Redact sensitive information from logs.
+11.	Separate candidate-visible, client-visible, recruiter-visible, verifier-visible, and super-admin information.
+12.	Define configurable retention periods.
+13.	Preserve legally necessary audit information while deleting unnecessary personal data.
+14.	Label all legal content for professional legal review before production.
+SECURITY
+Implement strong security controls.
+AUTHENTICATION
+•	Secure password hashing
+•	Email verification
+•	Password reset
+•	Session expiry
+•	Secure cookies
+•	HTTP-only cookies
+•	SameSite configuration
+•	Account lockout or progressive throttling
+•	Login rate limiting
+•	Generic authentication errors
+•	Session revocation
+•	Optional future two-factor authentication readiness
+AUTHORISATION
+•	Server-side role enforcement
+•	Object-level permissions
+•	Organisation-level data isolation
+•	Assignment-level permissions
+•	Verification-case permissions
+•	Document permissions
+•	Sensitive-case restrictions
+INPUT AND API SECURITY
+•	Server-side validation
+•	Input sanitisation
+•	CSRF protection where applicable
+•	Injection prevention
+•	XSS prevention
+•	Safe redirects
+•	Strict CORS
+•	Request-size limits
+•	Rate limiting
+•	Secure error handling
+•	No stack traces in production
+FILE-UPLOAD SECURITY
+•	Allowlisted formats
+•	File-size limits
+•	Real MIME validation
+•	Extension validation
+•	Randomised storage names
+•	Protected storage
+•	Signed URLs
+•	Malware-scanning readiness
+•	Image sanitisation
+•	Metadata stripping where appropriate
+•	Audit logging
+•	No executable uploads
+•	No public CV or ID URLs
+SECURITY HEADERS
+Implement:
+•	Strict-Transport-Security
+•	Content-Security-Policy
+•	X-Content-Type-Options
+•	Referrer-Policy
+•	Permissions-Policy
+•	CSP frame-ancestors or appropriate frame protection
+Disable unnecessary framework disclosure.
+AUDIT LOGS
+Record sensitive activities such as:
+•	Login
+•	Failed login
+•	Password reset
+•	Email change
+•	Role change
+•	Permission change
+•	Profile verification
+•	Verification reversal
+•	Candidate consent
+•	Candidate data release
+•	Candidate document access
+•	Candidate export
+•	Organisation approval
+•	Organisation suspension
+•	Assignment-stage change
+•	Shortlist approval
+•	Hiring decision
+•	Complaint access
+•	Data deletion
+•	Administrative configuration change
+Audit logs should be tamper-resistant and accessible only to authorised personnel.
+DATA MODEL
+Design or extend the database with properly normalised entities. Adapt names to the existing architecture.
+Potential entities:
+•	User
+•	Role
+•	Permission
+•	UserRole
+•	ProfessionalProfile
+•	Organisation
+•	OrganisationMember
+•	Discipline
+•	Skill
+•	ProfessionalSkill
+•	Sector
+•	GeographicArea
+•	Language
+•	WorkExperience
+•	Education
+•	Certification
+•	PortfolioItem
+•	Publication
+•	Reference
+•	ProfessionalAvailability
+•	EngagementPreference
+•	Document
+•	VerificationCase
+•	VerificationCheck
+•	VerificationEvidence
+•	TalentRequest
+•	RecruitmentAssignment
+•	Vacancy
+•	Application
+•	CandidatePipelineEntry
+•	CandidateStageHistory
+•	Screening
+•	Assessment
+•	AssessmentQuestion
+•	AssessmentSubmission
+•	AssessmentScore
+•	Interview
+•	InterviewPanelMember
+•	InterviewScorecard
+•	ReferenceCheck
+•	CandidateMatch
+•	CandidateConsent
+•	DataRelease
+•	Shortlist
+•	ShortlistCandidate
+•	Placement
+•	ReplacementCase
+•	ServicePackage
+•	Contract
+•	Quote
+•	Invoice
+•	Notification
+•	Message
+•	CommunicationLog
+•	Complaint
+•	Appeal
+•	PrivacyRequest
+•	AuditLog
+•	ActivityLog
+•	SystemConfiguration
+•	ContentPage
+•	EmailTemplate
+Requirements:
+•	Use UUIDs or another secure identifier strategy.
+•	Do not expose predictable internal IDs where avoidable.
+•	Use indexes for frequent searches.
+•	Add uniqueness constraints.
+•	Add referential integrity.
+•	Add soft deletion only where appropriate.
+•	Use immutable history tables for important transitions.
+•	Add created and updated timestamps.
+•	Record responsible users for critical changes.
+•	Encrypt highly sensitive fields where technically justified.
+•	Avoid putting all professional information into one unstructured JSON field.
+•	Use JSON only for genuinely flexible configuration.
+SEARCH
+Implement secure recruiter search across:
+•	Skills
+•	Disciplines
+•	Experience
+•	Education
+•	Certifications
+•	Sector
+•	Geographic experience
+•	Location
+•	Languages
+•	Availability
+•	Engagement preference
+•	Work arrangement
+•	Verification level
+•	Assessment results
+•	Deployment history
+Requirements:
+•	Pagination
+•	Search debouncing
+•	Saved searches
+•	Search history
+•	Filter combinations
+•	Sorting
+•	Explainable results
+•	No public access
+•	No organisation-wide unrestricted search
+•	No unauthorised exports
+•	Database-level performance optimisation
+ACCESSIBILITY
+Target WCAG 2.2 AA.
+Verify:
+•	Keyboard navigation
+•	Focus visibility
+•	Focus management
+•	Accessible forms
+•	Error announcements
+•	Success announcements
+•	Labels
+•	Instructions
+•	Required-field identification
+•	Colour contrast
+•	Touch-target sizes
+•	Modal accessibility
+•	Dropdown accessibility
+•	Tables
+•	Filters
+•	Pagination
+•	File uploads
+•	Progress indicators
+•	Multi-step forms
+•	Status badges
+•	Screen-reader compatibility
+•	Reduced motion
+•	Zoom up to 200%
+Do not rely on colour alone to communicate recruitment or verification status.
+RESPONSIVE DESIGN
+Test at:
+•	320 px
+•	375 px
+•	390 px
+•	768 px
+•	1024 px
+•	1280 px
+•	1440 px
+Verify:
+•	Public landing pages
+•	Registration
+•	Profile editor
+•	Talent request
+•	Dashboards
+•	Search
+•	Filters
+•	Pipelines
+•	Tables
+•	Candidate cards
+•	Modals
+•	Interviews
+•	Assessments
+•	File uploads
+•	Settings
+•	Notifications
+•	Footer
+•	Authentication pages
+For complex administrative tables, provide responsive alternatives rather than forcing unreadable compressed columns.
+PERFORMANCE
+Optimise:
+•	Public pages
+•	Dashboards
+•	Search
+•	Candidate lists
+•	Document access
+•	Analytics
+•	Notifications
+•	Large profile forms
+Use:
+•	Pagination
+•	Server-side filtering
+•	Selective data loading
+•	Database indexes
+•	Caching where safe
+•	Code splitting
+•	Image optimisation
+•	Lazy loading
+•	Background jobs for heavy tasks
+•	Queue readiness for email, parsing, verification, and report generation
+•	Timeouts and graceful failure
+Never cache one organisation’s sensitive data for another user.
+NOTIFICATIONS AND BACKGROUND JOBS
+Design background-job readiness for:
+•	Email delivery
+•	CV parsing
+•	Document scanning
+•	Verification reminders
+•	Interview reminders
+•	Deadline reminders
+•	Expiring verification
+•	Consent reminders
+•	Report generation
+•	Data retention
+•	Scheduled deletion
+•	Analytics aggregation
+Jobs must be idempotent and retry safely.
+ADMINISTRATIVE CONFIGURATION
+Super Admin should be able to configure:
+•	Disciplines
+•	Skills
+•	Sectors
+•	Geographic areas
+•	Languages
+•	Verification levels
+•	Recruitment stages
+•	Service packages
+•	Assessment templates
+•	Interview templates
+•	Scorecards
+•	Consent text
+•	Privacy versions
+•	Email templates
+•	Notification rules
+•	Retention periods
+•	Upload limits
+•	Replacement rules
+•	Organisation verification rules
+•	Public content
+•	Feature flags
+Do not require source-code editing for routine administrative changes.
+REPORTING
+Create exportable, privacy-conscious reports such as:
+•	Talent request report
+•	Longlist report
+•	Shortlist report
+•	Screening report
+•	Assessment report
+•	Interview report
+•	Verification report
+•	Reference-check report
+•	Recruitment completion report
+•	Placement report
+•	Recruitment funnel
+•	Time-to-shortlist
+•	Time-to-hire
+•	Source effectiveness
+•	Skills-demand report
+•	Geographic talent report
+•	Client activity report
+•	Recruiter workload report
+Exports must respect permissions and consent.
+Add:
+•	Export reason
+•	Exporting user
+•	Date
+•	Scope
+•	Audit record
+•	Optional watermark
+•	Data-minimisation controls
+Do not include identity documents or verification evidence in standard reports.
+ANALYTICS
+Track privacy-conscious events:
+•	Professional registration started
+•	Professional registration completed
+•	Profile completion
+•	Verification submitted
+•	Organisation registration
+•	Talent request submitted
+•	Recruitment consultation requested
+•	Opportunity invitation
+•	Candidate response
+•	Consent approved
+•	Consent declined
+•	Screening completed
+•	Assessment completed
+•	Interview completed
+•	Shortlist shared
+•	Selection recorded
+•	Placement completed
+•	Assignment closed
+Do not send personal data, CV content, salary information, assessment answers, or contact information to analytics providers.
+ERROR AND EMPTY STATES
+Create professional, helpful states for:
+•	No matching candidates
+•	No active assignments
+•	No applications
+•	No organisation requests
+•	Empty verification queue
+•	Expired invitation
+•	Withdrawn consent
+•	Closed vacancy
+•	Failed upload
+•	Unavailable document
+•	Invalid link
+•	Session expired
+•	Permission denied
+•	Network failure
+•	Server error
+•	404
+Do not expose technical stack traces.
+TESTING
+Add and run tests for:
+AUTHENTICATION
+•	Registration
+•	Email verification
+•	Login
+•	Logout
+•	Password reset
+•	Session expiry
+•	Rate limiting
+•	Account suspension
+AUTHORISATION
+•	Professional permissions
+•	Organisation isolation
+•	Recruiter permissions
+•	Verifier permissions
+•	Manager permissions
+•	Super Admin permissions
+•	Document access
+•	Candidate visibility
+•	Sensitive-case access
+PROFESSIONAL WORKFLOW
+•	Profile creation
+•	Profile update
+•	Document upload
+•	Availability
+•	Verification
+•	Consent
+•	Opportunity response
+•	Privacy request
+ORGANISATION WORKFLOW
+•	Registration
+•	Verification
+•	Talent request
+•	Assignment tracking
+•	Shortlist access
+•	Interview feedback
+•	Hiring decision
+RECRUITMENT WORKFLOW
+•	Assignment creation
+•	Candidate sourcing
+•	Longlisting
+•	Consent
+•	Verification
+•	Screening
+•	Assessment
+•	Shortlisting
+•	Interview
+•	Selection
+•	Placement
+•	Closure
+•	Replacement case
+PRIVACY
+•	Anonymised profiles
+•	Consent enforcement
+•	Candidate release
+•	Data export
+•	Data deletion
+•	Retention rules
+•	Document access
+•	Audit logs
+SECURITY
+•	Input validation
+•	Injection protection
+•	XSS protection
+•	CSRF protection
+•	File-upload validation
+•	Rate limiting
+•	Organisation isolation
+•	Object-level access
+•	Secure headers
+QUALITY
+•	Accessibility
+•	Responsive behaviour
+•	Metadata
+•	Broken links
+•	Production build
+•	Type checking
+•	Linting
+•	Unit tests
+•	Integration tests
+•	End-to-end tests
+Do not claim tests passed unless they were actually run.
+IMPLEMENTATION PRIORITIES
+PRIORITY 1: WORKING MVP
+Implement first:
+•	Professional registration and authentication
+•	Professional profile
+•	CV and credential upload
+•	Disciplines and skills
+•	Availability
+•	Admin review
+•	Granular verification
+•	Organisation registration
+•	Organisation verification
+•	Talent request
+•	Recruiter search and filters
+•	Recruitment assignment
+•	Longlist
+•	Shortlist
+•	Candidate consent
+•	Controlled candidate release
+•	Notifications
+•	Role-based permissions
+•	Audit logs
+•	Privacy controls
+•	Secure document storage
+•	Public Talent & Expert Network pages
+PRIORITY 2: MANAGED RECRUITMENT
+Then implement:
+•	Vacancy publication
+•	External applications
+•	Screening
+•	Assessments
+•	Interviews
+•	Scorecards
+•	Reference checks
+•	Placement
+•	Project-team assembly
+•	Rapid field deployment
+•	Executive-search confidentiality
+•	Organisation dashboard
+•	Recruitment reporting
+•	Complaints and appeals
+PRIORITY 3: ADVANCED CAPABILITIES
+Prepare or implement, depending on the existing architecture and project scope:
+•	AI-assisted CV parsing
+•	Explainable matching
+•	Recruitment process outsourcing
+•	Contracts and quotations
+•	Invoices and payments
+•	Retainer plans
+•	Replacement cases
+•	Advanced analytics
+•	SMS and WhatsApp notifications
+•	Saved searches
+•	Talent pipelines
+•	Background jobs
+•	Data-retention automation
+Do not compromise the MVP by prematurely building complex AI or billing features.
+MIGRATION AND BACKWARD COMPATIBILITY
+If professionals already exist in the Expert Pool:
+1.	Preserve every valid account.
+2.	Preserve existing profiles and documents.
+3.	Create safe migrations.
+4.	Map existing fields to the improved schema.
+5.	Do not silently mark old profiles as verified.
+6.	Assign appropriate initial verification statuses.
+7.	Preserve auditability.
+8.	Preserve working login credentials.
+9.	Preserve important URLs or redirect them.
+10.	Create rollback-safe migrations.
+11.	Back up data before destructive migration.
+12.	Report data that cannot be migrated automatically.
+SEO AND PRIVATE ROUTES
+Public marketing pages should have:
+•	Unique titles
+•	Meta descriptions
+•	Canonical URLs
+•	Open Graph metadata
+•	Social images
+•	Structured data
+•	Breadcrumbs
+Private pages must use:
+•	noindex, nofollow
+•	Secure authentication
+•	Proper cache controls
+•	No inclusion in sitemap
+Do not expose professional profiles, organisation dashboards, recruitment assignments, shortlists, or candidate documents to search engines.
+DEFINITION OF DONE
+The work is complete only when:
+1.	Professionals can register and build profiles.
+2.	Professionals can upload documents securely.
+3.	Professionals can control visibility and availability.
+4.	Result Seekers can review and verify profiles.
+5.	Organisations can register and be verified.
+6.	Organisations can submit talent requests.
+7.	Result Seekers can create recruitment assignments.
+8.	Recruiters can search and shortlist professionals.
+9.	Candidates must consent before identifiable information is released.
+10.	Organisations can review only authorised candidate information.
+11.	Recruitment stages are tracked.
+12.	Role permissions are enforced server-side.
+13.	Sensitive documents are protected.
+14.	Important actions are audited.
+15.	Public pages explain the service clearly.
+16.	Existing Expert Pool users are preserved.
+17.	The system works on desktop and mobile.
+18.	Accessibility requirements are addressed.
+19.	Security checks are completed.
+20.	Tests pass.
+21.	The production build succeeds.
+22.	No invented data is published.
+23.	No secrets are exposed.
+24.	No private route is indexed.
+25.	The implementation is documented.
+FINAL HANDOVER FORMAT
+When finished, provide:
+1.	Executive summary
+2.	Architecture used
+3.	Features completed
+4.	Public pages created or updated
+5.	Professional workflow
+6.	Organisation workflow
+7.	Recruiter workflow
+8.	Verification workflow
+9.	Candidate-consent workflow
+10.	Roles and permissions
+11.	Database changes
+12.	Migrations
+13.	APIs added or changed
+14.	Security improvements
+15.	Privacy controls
+16.	Accessibility improvements
+17.	Performance improvements
+18.	Tests and commands run
+19.	Actual test results
+20.	Required environment variables
+21.	Deployment instructions
+22.	Existing data-migration instructions
+23.	Administrator setup instructions
+24.	Features deferred to later phases
+25.	Missing business information requiring confirmation
+26.	Risks or blockers
+27.	Final production-readiness assessment
+Do not merely provide design suggestions or sample screens. Implement the complete working foundation inside the existing Result Seekers system, preserve existing functionality, run verification, and clearly document the result.
+

@@ -6,6 +6,7 @@ import { CTASection } from "@/components/layout/CTASection";
 import { Badge } from "@/components/ui/Badge";
 import { TextLink } from "@/components/ui/TextLink";
 import { TrustIndicators } from "@/components/sections/TrustIndicators";
+import { TeamSection } from "@/components/sections/TeamSection";
 import { siteConfig, coreValues } from "@/config/site";
 import { FadeIn } from "@/components/ui/FadeIn";
 
@@ -89,6 +90,8 @@ export default function AboutPage() {
           ))}
         </ul>
       </Section>
+
+      <TeamSection />
 
       <CTASection
         heading="Let's Work Together"

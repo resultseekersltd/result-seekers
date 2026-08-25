@@ -1,8 +1,8 @@
 /**
- * Mirrors the `team_members` table (backend: app/Models/TeamMember.php).
- * No public API endpoint exists for this yet (Backend Phase 2 covered
- * Solutions/Products/Articles/Courses only) — declared now so TeamCard has
- * a real contract to render against once one does.
+ * Mirrors the `team_members` table and TeamMemberResource (backend:
+ * app/Models/TeamMember.php, app/Http/Resources/TeamMemberResource.php).
+ * The public GET /api/team-members endpoint (Task 014) finally gives
+ * TeamCard a real data source — see components/sections/TeamSection.tsx.
  */
 export interface TeamMember {
   id: number;
@@ -10,4 +10,6 @@ export interface TeamMember {
   roleTitle: string;
   bio: string | null;
   photoPath: string | null;
+  order: number;
+  isActive: boolean;
 }

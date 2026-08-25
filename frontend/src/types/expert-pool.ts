@@ -141,3 +141,95 @@ export interface EducationPayload {
   end_year?: number | null;
   country?: string | null;
 }
+
+// ─── Opportunities & Consent (Phase 2 — Managed Recruitment Pipeline) ─────────
+//
+// Deliberately does not expose which organisation an opportunity is for —
+// the source documents only authorize disclosing that at consent-request
+// time, not before (see OpportunityResource's own docblock on the backend).
+
+export interface Opportunity {
+  id: string;
+  status: "sent" | "accepted" | "declined" | "expired" | "withdrawn";
+  sent_at: string | null;
+  responded_at: string | null;
+  expires_at: string | null;
+  assignment_reference: string | null;
+  stage: string | null;
+}
+
+export interface Consent {
+  id: string;
+  purpose: string | null;
+  consent_text_version: string | null;
+  status: "requested" | "consented" | "declined" | "withdrawn";
+  requested_at: string | null;
+  responded_at: string | null;
+  consented_at: string | null;
+  declined_at: string | null;
+  withdrawn_at: string | null;
+}
+
+// ─── Assessments & Interviews (Phase 3 — Evaluation Workflow) ─────────────────
+//
+// Never exposes reviewer identity, criteria breakdown, panel data, or
+// interviewer notes — see AssessmentResource/InterviewResource's own
+// docblocks on the backend for the exact privacy boundary.
+
+export interface AssessmentSubmission {
+  id: string;
+  attempt_number: number;
+  response_text: string | null;
+  has_file: boolean;
+  file_original_name: string | null;
+  answers: Record<string, unknown> | null;
+  submitted_at: string | null;
+}
+
+export interface Assessment {
+  id: string;
+  type: string;
+  title: string;
+  instructions: string | null;
+  time_limit_minutes: number | null;
+  starts_at: string | null;
+  closes_at: string | null;
+  attempt_limit: number | null;
+  status: "assigned" | "in_progress" | "submitted" | "under_review" | "reviewed" | "expired" | "cancelled";
+  status_label: string;
+  my_submission: AssessmentSubmission | null;
+  result: { score: string; max_score: string } | null;
+}
+
+export interface Interview {
+  id: string;
+  type: string;
+  scheduled_at: string | null;
+  timezone: string | null;
+  location_or_link: string | null;
+  status: "scheduled" | "confirmed" | "completed" | "cancelled" | "no_show" | "rescheduled";
+  status_label: string;
+  candidate_confirmed_at: string | null;
+}
+
+export interface Placement {
+  id: string;
+  engagement_type: string | null;
+  start_date: string | null;
+  end_date: string | null;
+  deployment_location: string | null;
+  deployment_notes: string | null;
+  onboarding_notes: string | null;
+  status: "pending_confirmation" | "confirmed" | "cancelled";
+  status_label: string;
+  organisation_confirmed_at: string | null;
+  professional_confirmed_at: string | null;
+}
+
+export interface AssignmentFeedback {
+  id: string;
+  rating: number | null;
+  comments: string | null;
+  submitted_at: string | null;
+  is_mine: boolean;
+}
